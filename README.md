@@ -42,3 +42,6 @@ Control Policies
 *If you are still having difficulty setting up strictapplocker, watch the video below*
 https://github.com/sthivaios/strictapplocker/assets/109022579/f15a249f-46d6-47f4-b24c-93bbc9fb777e
 
+# Notes
+Keep in mind, strictapplocker is VERY strict.
+This means that even files like .mp4 and .jpg will be blocked.
