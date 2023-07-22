@@ -1,0 +1,54 @@
+<AppLockerPolicy Version="1">
+  <RuleCollection Type="Appx" EnforcementMode="NotConfigured" />
+  <RuleCollection Type="Dll" EnforcementMode="NotConfigured" />
+  <RuleCollection Type="Exe" EnforcementMode="Enabled">
+    <FilePublisherRule Id="5e995b8c-3a84-40be-a33a-0e24b4121738" Name="Allow ALL Singed Files To Be Run Regardless Publisher" Description="This allows all signed executables to be run, regardles who the publisher that signed the file is. Although some cases have been reported, it is VERY rare for malware to be signed. This rule allows all signed software to be run, and does not allow unsigned software to be run. Sometimes, it is possible to find real non-malicious programs that are not signed. You can temporarily disable this rule to allow the program to be run. Just don't forget to enable it again!" UserOrGroupSid="S-1-1-0" Action="Allow">
+      <Conditions>
+        <FilePublisherCondition PublisherName="*" ProductName="*" BinaryName="*">
+          <BinaryVersionRange LowSection="*" HighSection="*" />
+        </FilePublisherCondition>
+      </Conditions>
+    </FilePublisherRule>
+    <FilePathRule Id="34385ce6-4edb-4fcc-90ee-206bbdee9495" Name="Block ALL .com Files From Running" Description=".com files are files that are often used for malicious stuff. They are very rarely used for non-malicious reasons nowadays, so blocking all .com is generally ok." UserOrGroupSid="S-1-1-0" Action="Deny">
+      <Conditions>
+        <FilePathCondition Path="*.com" />
+      </Conditions>
+    </FilePathRule>
+    <FilePathRule Id="fe385c7f-3f87-40f8-bfc7-bb471236db5e" Name="Block ALL .scr Files From Running" Description=".scr files are screen saver files. They are also executables though. They are almost always used for malware. 99% of time, if you come across a .scr file it will be malicious. The fact that Windows identifies them as &quot;Screen Saver Files&quot; makes them easy to hide the fact that they are not just a screen saver. Blocking them is usually ok, since it is EXTREMELY rare to find a .scr file that really is a screen saver, especially in 2020 and later, because nobody uses screen savers anymore." UserOrGroupSid="S-1-1-0" Action="Deny">
+      <Conditions>
+        <FilePathCondition Path="*.scr" />
+      </Conditions>
+    </FilePathRule>
+  </RuleCollection>
+  <RuleCollection Type="Msi" EnforcementMode="Enabled">
+    <FilePublisherRule Id="c62f3a96-45f5-4e2e-b781-c9d641e9057d" Name="Allow Windows Installers Singed By Microsoft" Description="This rule allows all Windows installers (.msi files) to be run, provided they are singed by Microsoft Corporation (O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US)." UserOrGroupSid="S-1-1-0" Action="Allow">
+      <Conditions>
+        <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="*" BinaryName="*">
+          <BinaryVersionRange LowSection="*" HighSection="*" />
+        </FilePublisherCondition>
+      </Conditions>
+    </FilePublisherRule>
+  </RuleCollection>
+  <RuleCollection Type="Script" EnforcementMode="Enabled">
+    <FilePathRule Id="3bc0e480-8830-45eb-8ee9-296a22439acd" Name="Blocks ALL .bat Files" Description=".bat files are the exact same as .cmd files. They are often used for legit reasons, but can and have been used for malware. It's better to block them than to accidentally execute malware. Once again, this package of rules are STRICT." UserOrGroupSid="S-1-1-0" Action="Deny">
+      <Conditions>
+        <FilePathCondition Path="*.bat" />
+      </Conditions>
+    </FilePathRule>
+    <FilePathRule Id="4e8dd1f2-7554-4959-a686-6f937b200d02" Name="Blocks ALL .cmd Files" Description=".cmd files are not always used for malware. It is very often used for legit reasons. It can and has been used for malware, so it's better to be safe than sorry. This rule will block ALL .cmd files / scripts. Again, this is a STRICT policy package, so all rules are VERY STRICT." UserOrGroupSid="S-1-1-0" Action="Deny">
+      <Conditions>
+        <FilePathCondition Path="*.cmd" />
+      </Conditions>
+    </FilePathRule>
+    <FilePathRule Id="b3d8615c-4789-4da7-9969-9fad46e457ea" Name="Blocks ALL .ps1 Files" Description=".ps1 files are very often used for legit reasons. They are like .cmd and .bat files, but they use PowerShell instead of Command Line. They are definitely not something that a regular user should run. .ps1 files are only for powerusers and people who know what they are doing, so it's better to block all .ps1 scripts." UserOrGroupSid="S-1-1-0" Action="Deny">
+      <Conditions>
+        <FilePathCondition Path="*.ps1" />
+      </Conditions>
+    </FilePathRule>
+    <FilePathRule Id="e03901b5-33db-4aee-9816-4ac4f597261e" Name="Blocks ALL .vbs Files" Description="Usually, .vbs files, especially nowadays, are used to spread malware, and it's usually never a good idea to run a .vbs file that you downloaded online. This rule will BLOCK ALL .vbs files / scripts." UserOrGroupSid="S-1-1-0" Action="Deny">
+      <Conditions>
+        <FilePathCondition Path="*.vbs" />
+      </Conditions>
+    </FilePathRule>
+  </RuleCollection>
+</AppLockerPolicy>
